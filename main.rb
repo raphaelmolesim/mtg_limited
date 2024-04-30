@@ -1,4 +1,3 @@
-require "./channel_fireball_article"
 require "./channel_fireball_index"
 require "./mtg_zone_index"
 
