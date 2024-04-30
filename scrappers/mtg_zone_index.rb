@@ -1,4 +1,4 @@
-require "./mtg_zone_article"
+require "./scrappers/mtg_zone_article"
 
 class MtgZoneIndex
   URL = "https://mtgazone.com/?"

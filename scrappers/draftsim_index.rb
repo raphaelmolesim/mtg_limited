@@ -1,5 +1,5 @@
 require './web'
-require './draftsim_article'
+require './scrappers/draftsim_article'
 
 class DraftsimIndex
   URL = "https://duckduckgo.com/?"
