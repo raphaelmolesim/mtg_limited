@@ -1,5 +1,6 @@
 require "./channel_fireball_index"
 require "./mtg_zone_index"
+require "./draftsim_index"
 
 set = "Outlaws of Thunder Junction".downcase
 set_abbreviation = "OTJ"
@@ -7,7 +8,8 @@ search_string = "limited set review #{set}"
 
 providers_availables = {
   "1) Channel Fireball" => ChannelFireballIndex,
-  "2) MTG Zone" => MtgZoneIndex
+  "2) MTG Zone" => MtgZoneIndex,
+  "3) Draftsim" => DraftsimIndex
 }
 
 puts "==> Select the provider you want to use: "

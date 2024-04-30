@@ -63,7 +63,6 @@ class MtgZoneArticle
   end
 
   def comment identifier_node
-    comment = ""
     current_paragraph = identifier_node.parent.next_element.next_element.next_element
     current_paragraph.text
   end
