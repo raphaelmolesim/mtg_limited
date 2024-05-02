@@ -1,4 +1,4 @@
-require "./console"
+require_relative  "./console"
 
 set = "Outlaws of Thunder Junction".downcase
 set_abbreviation = "OTJ"

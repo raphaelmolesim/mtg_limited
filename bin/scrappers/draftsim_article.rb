@@ -23,7 +23,7 @@
 =end
 
 require 'nokogiri'
-require './card'
+require './shared/card'
 require 'json'
 
 class DraftsimlArticle

@@ -1,4 +1,4 @@
-require "./web"
+require_relative "./web"
 require "json"
 
 class Scryfall

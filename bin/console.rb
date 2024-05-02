@@ -1,7 +1,7 @@
-require "./scrappers/channel_fireball_index"
-require "./scrappers/mtg_zone_index"
-require "./scrappers/draftsim_index"
-require "./scryfall"
+require_relative "./scrappers/channel_fireball_index"
+require_relative "./scrappers/mtg_zone_index"
+require_relative "./scrappers/draftsim_index"
+require "./shared/scryfall"
 
 class ConsoleApp
   def download_data

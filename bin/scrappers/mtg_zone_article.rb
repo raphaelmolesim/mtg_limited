@@ -21,6 +21,8 @@
 
 =end
 
+require './shared/card'
+
 class MtgZoneArticle
 
   def initialize(page)

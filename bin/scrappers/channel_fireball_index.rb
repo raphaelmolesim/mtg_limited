@@ -1,6 +1,6 @@
-require './web'
+require './shared/web'
 require 'json'
-require './scrappers/channel_fireball_article'
+require_relative './channel_fireball_article'
 
 class ChannelFireballIndex
   URL = "https://cfb-infinite-api.tcgplayer.com/content/articles/search/?"

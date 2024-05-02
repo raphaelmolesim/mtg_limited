@@ -1,5 +1,5 @@
-require './web'
-require './scrappers/draftsim_article'
+require './shared/web'
+require_relative './draftsim_article'
 
 class DraftsimIndex
   URL = "https://duckduckgo.com/?"
