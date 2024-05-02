@@ -4,7 +4,9 @@ require "./scryfall"
 
 set :port, 3001
 
-set :public_folder, __dir__ + '/out'
+public_folder = __dir__ + '/public'
+set :public_folder, public_folder
+puts "Public folder: #{public_folder}"
 
 get "/sets" do
   cards_files = Dir["./db/*-cards.json"]
@@ -16,6 +18,6 @@ get "/sets" do
 end
 
 get "/" do
-  File.read("views/index.html")
+  File.read("web/views/index.html")
 end
 
