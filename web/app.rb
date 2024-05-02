@@ -1,6 +1,6 @@
 require "sinatra"
 require "json"
-require "./scryfall"
+require "./shared/scryfall"
 
 set :port, 3001
 
