@@ -4,7 +4,6 @@ set = "Outlaws of Thunder Junction".downcase
 set_abbreviation = "OTJ"
 search_string = "limited set review #{set}"
 
-
 console = ConsoleApp.new
 
 puts " ## Welcome to the MTG Limited Review App ##"
