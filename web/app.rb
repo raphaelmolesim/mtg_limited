@@ -21,3 +21,8 @@ get "/" do
   File.read("web/views/index.html")
 end
 
+get "/style.css" do
+  content_type :css
+  File.read("web/views/style.css")
+end
+
