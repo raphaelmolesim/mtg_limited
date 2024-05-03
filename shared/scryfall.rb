@@ -35,6 +35,7 @@ class Scryfall
         "released_at" => @set["released_at"],
         "set_type" => @set["set_type"],
         "parent_set_code" => @set["parent_set_code"],
+        "icon_svg_uri" => @set["icon_svg_uri"]
       }.to_json
     end
 
