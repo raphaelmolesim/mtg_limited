@@ -1,19 +1,16 @@
 import React from 'react';
-import { Layout } from 'antd';
-const { Header, Content, Footer, Sider } = Layout;
+import MasterPage from './master_page';
 
 const App = () => {
-  
+
   return (
-    <Layout>
-      <Header>header</Header>
-      <Layout>
-        <Sider>left sidebar</Sider>
-        <Content>main content</Content>
-        <Sider>right sidebar</Sider>
-      </Layout>
-      <Footer>footer</Footer>
-    </Layout>
+    <MasterPage>
+      <h1 className="text-4xl font-bold text-center pt-8">Welcome to the</h1>
+      <h1 className="text-5xl font-bold text-center pb-8">MTG Limited</h1>
+      <div class="flex flex-row items-center justify-center py-8">
+        <img src="phage-splash.jpeg" alt="MTG Limited" className="w-[340px] h-[462px]" />
+      </div>
+    </MasterPage>
   );
 };
 export default App;

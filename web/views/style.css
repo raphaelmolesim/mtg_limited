@@ -1,9 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 html, body {
   padding: 0;
   margin: 0;
-  background: #fff;
 }
 
-#root {
-  padding: 24px;
+.logo {
+  font-size: 24px;
+  font-weight: 900;
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
+
+/*
+Base Color: --alice-blue: #e9f1f7ff; slate-100
+Sidebar: --rich-black: #131b23ff; gray-900
+Primary: --ucla-blue: #2274a5ff; cyan-700
+Secondary: --pearl: #e7dfc6ff; stone-300
+Terciary: --cinereous: #816c61ff; stone-500
+*/
