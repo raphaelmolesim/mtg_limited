@@ -14,14 +14,12 @@ const SetList = ({ setSelectorFunction }) => {
       });
   }, []);
 
-  const selectSet = (event) => {
-    const el = event.target;
-    const set = el.dataset.set;
-    setSelectorFunction(set);
+  const selectSet = (setCode) => {
+    console.log("selectSet", setCode);
+    setSelectorFunction(setCode);
   };
 
   const setIcon = (code) => {
-    console.log("setIcon", code);
     fetch("/api/sets/otj/icon")
       .then((response) => {
         return response.text()
@@ -41,7 +39,7 @@ const SetList = ({ setSelectorFunction }) => {
           key={set.code}
           className="py-12 flex flex-row justify-center items-center"
         >
-          <PrimaryButton onClick={selectSet} className="flex flex-row items-center text-xl font-bold py-16 px-[26px] w-[80%] text-wrap">
+          <PrimaryButton onClick={() => selectSet(set.code)} className="flex flex-row items-center text-xl font-bold py-16 px-[26px] w-[80%] text-wrap">
             <div className="mr-4" id={`icon-${set.code}`}>
               {setIcon(set.code)}
             </div>

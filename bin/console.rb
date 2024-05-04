@@ -78,6 +78,6 @@ class ConsoleApp
     cards = scryfall.get_cards(set)
     File.write("db/#{set.code.downcase}-cards.json", cards.to_json)
 
-    puts "==> Database updated."
+    puts "==> Database updated with #{cards.size} new cards."
   end
 end

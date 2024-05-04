@@ -1,11 +1,14 @@
-require_relative "./web"
+require_relative "web"
 require "json"
 
 class Scryfall
-  def last_released_sets
+  def sets
     response = Web.get("https://api.scryfall.com/sets")
-    sets = JSON.parse(response)["data"]
-    sets.select { |set| set["set_type"] == "expansion" }.sort_by { |set| set["released_at"] }
+    JSON.parse(response)["data"]
+  end
+
+  def last_released_sets
+    sets.select { |set| set["set_type"] != "token" }.sort_by { |set| set["released_at"] }
       .reverse[0..10].map { |set| Set.new(set) }
   end
 
@@ -15,8 +18,22 @@ class Scryfall
   end
 
   def get_cards(set)
-    response = Web.get("https://api.scryfall.com/cards/search?q=e:#{set.code}")
-    JSON.parse(response)["data"]
+    cards = []
+    response = JSON(Web.get("https://api.scryfall.com/cards/search?q=e:#{set.code}"))
+    loop do
+      cards << response["data"]
+      break if !response["has_more"]
+      response = JSON(Web.get(response["next_page"]))
+    end
+    cards.flatten
+  end
+
+  def get_block(set_code)
+    exclude_list = ["memorabilia", "promo", "commander", "promo", "token"]
+    sets.select { |set|
+      set["code"] == set_code ||
+        (set["parent_set_code"]&.downcase == set_code && !exclude_list.include?(set["set_type"]))
+    }.map { |set| Set.new(set) }
   end
 
   class Set
