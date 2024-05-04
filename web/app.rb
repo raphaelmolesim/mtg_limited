@@ -3,7 +3,7 @@ require "json"
 require "./shared/scryfall"
 require "./shared/web"
 
-set :port, 3001
+set :port, 10000
 set :bind, "0.0.0.0"
 
 public_folder = __dir__ + "/public"
