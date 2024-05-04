@@ -29,7 +29,7 @@ class Scryfall
   end
 
   def get_block(set_code)
-    exclude_list = ["memorabilia", "promo", "commander", "promo", "token"]
+    exclude_list = ["memorabilia", "promo", "commander", "promo", "token", "alchemy"]
     sets.select { |set|
       set["code"] == set_code ||
         (set["parent_set_code"]&.downcase == set_code && !exclude_list.include?(set["set_type"]))
