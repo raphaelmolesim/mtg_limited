@@ -1,21 +1,23 @@
 import React, { useEffect } from "react";
 import PrimaryButton from "./Base";
 import { Modal } from "antd";
+import Image from "./Image";
 
 const Card = ({ card, nextCardFunction }) => {
   const [isCorrect, setIsCorrect] = React.useState(null);
   const [lastRating, setLastRating] = React.useState(null);
 
   const answerVisibility = isCorrect === null ? "hidden" : "block";
-  const imageStyle = ""
-  const incorrectImage = <img src="swat-crop.jpg" className={imageStyle} /> 
-  const correctImage = <img src="mages-guile-crop.jpg" className={imageStyle} /> 
+  const imageStyle = "absolute top-0 left-0 w-full h-[190px] object-cover rounded-lg"
+  const incorrectImage = <Image src="swat-crop.jpg" className={`${imageStyle} object-top`} /> 
+  const correctImage = <Image src="true-believer.png" className={`${imageStyle} object-center`} /> 
   const answerText =
     isCorrect === true ? "Nice! You got it!!!" : "Ops, not that...";
+  const textColor = isCorrect === true ? "text-emerald-600" : "text-red-600";
   const answerImage = isCorrect === true ? correctImage : incorrectImage;
   const openModal = isCorrect === null ? false : true;
-  const nextAndViewCardButtonVisibility = isCorrect === null && lastRating != null ? "block" : 'hidden';
-  const ratingButtonsVisibility = isCorrect === null && lastRating != null ? 'hidden' : "block";
+  const nextAndViewCardButtonVisibility = lastRating != null ? "block" : 'hidden';
+  const ratingButtonsVisibility = lastRating != null ? 'hidden' : "block";
 
   const ratingMap = {
     bomb: [4.5, 5],
@@ -66,14 +68,15 @@ const Card = ({ card, nextCardFunction }) => {
     <div>
       <Modal title={""} open={openModal} onOk={nextCard} okText="Next card" onCancel={viewCard} cancelText="View card">
         {answerImage}
-        <p className="mb-4 font-bold text-3xl text-center">Rating: {toHuman(reverseRatingMap[card["rating"].toString()])} ({card["rating"]})</p>
+        <p className="mt-[180px] mb-4 font-bold text-3xl text-center">Rating: {toHuman(reverseRatingMap[card["rating"].toString()])} ({card["rating"]})</p>
+        <p className={`font-bold text-lg ${textColor}`}>{answerText}</p>
         <p className="mb-4">{card["comment"]}</p>  
       </Modal>      
       <h1 className="text-center font-bold text-2xl py-4">
         How would you rate this card?
       </h1>
       <div>
-        <img src={card["image_uris"]["normal"]} />
+        <img src={card["image_uris"]["normal"]} alt={card["name"]} />
       </div>
       <div className={`grid justify-items-center grid-cols-2 grid-rows-2 pt-2 ${ratingButtonsVisibility}`}>
         <PrimaryButton
