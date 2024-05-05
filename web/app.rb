@@ -50,7 +50,10 @@ get "/" do
 end
 
 get "/settings" do
-  { public_folder: public_folder }.to_json
+  { 
+    public_folder: public_folder,
+    public: Dir["#{public_folder}/*"]
+  }.to_json
 end
 
 get "/style.css" do

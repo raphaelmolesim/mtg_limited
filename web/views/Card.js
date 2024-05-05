@@ -64,7 +64,7 @@ const Card = ({ card, nextCardFunction }) => {
 
   return (
     <div>
-      <Modal title={answerText} open={openModal} onOk={nextCard} okText="Next card" style={ { titleFontSize: 24 }} onCancel={viewCard} cancelText="View card">
+      <Modal title={""} open={openModal} onOk={nextCard} okText="Next card" onCancel={viewCard} cancelText="View card">
         {answerImage}
         <p className="mb-4 font-bold text-3xl text-center">Rating: {toHuman(reverseRatingMap[card["rating"].toString()])} ({card["rating"]})</p>
         <p className="mb-4">{card["comment"]}</p>  
