@@ -49,6 +49,10 @@ get "/" do
   File.read("web/views/index.html")
 end
 
+get "/settings" do
+  { public_folder: public_folder }.to_json
+end
+
 get "/style.css" do
   content_type :css
   File.read("web/views/style.css")
