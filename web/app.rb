@@ -2,6 +2,11 @@ require "sinatra"
 require "json"
 require "./shared/scryfall"
 require "./shared/web"
+require "./shared/rating_series"
+require "./shared/rating"
+require "./shared/cards_repository"
+require 'mongo'
+require 'dotenv/load'
 
 set :port, 10000
 set :bind, "0.0.0.0"
@@ -43,6 +48,36 @@ get "/api/sets/:id/cards/sample" do
   raise "Card not found. Name: #{selected_rating['name']}" if card.nil?
   merged_card = card.merge(selected_rating)
   JSON(merged_card)
+end
+
+post "/api/rating_series" do
+  request_data = JSON.parse(request.body.read)
+  user_id = 1
+  rating = RatingSeries.new(user_id: user_id, set: request_data["set"])
+  db = Mongo::Client.new(ENV['MONGODB_CONNECTION_STRING']).database
+  result = db.collection("rating_series").insert_one(rating.to_h)
+  result.inserted_id.to_s
+end
+
+post "/api/rating_series/:id/ratings" do
+  id = BSON::ObjectId(params[:id])
+  request_data = JSON.parse(request.body.read)
+  user_id = 1
+  set = request_data["set"]
+  client = Mongo::Client.new(ENV['MONGODB_CONNECTION_STRING'])
+  collection = client[:rating_series]
+  query = { user_id:, set:, :"_id" => id }
+  series = collection.find(query).first
+  raise "Series not found" if series.nil?
+  card_id = request_data["card_id"]
+  rating = request_data["rating"]
+  available_ratings = [ :bomb, :impactful, :filler_a, :filler_b, :trap]
+  raise "Invalid rating: #{available_ratings}" if !available_ratings.include?(rating.to_sym)
+  raise "Card id is requred" if card_id.nil?
+  rating_model = Rating.new(card_id:, rating:, rating_series_id: params[:id], set:)
+  collection = client[:ratings]
+  result = collection.insert_one(rating_model.to_h)
+  result.inserted_id.to_s
 end
 
 get "/" do

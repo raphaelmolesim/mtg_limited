@@ -3,11 +3,9 @@ import PrimaryButton from "./Base";
 import { Modal } from "antd";
 import Image from "./Image";
 
-const Card = ({ card, nextCardFunction }) => {
+const Card = ({ card, nextCardFunction, ratingSeriesId }) => {
   const [isCorrect, setIsCorrect] = React.useState(null);
   const [lastRating, setLastRating] = React.useState(null);
-
-  const answerVisibility = isCorrect === null ? "hidden" : "block";
   const imageStyle = "absolute top-0 left-0 w-full h-[190px] object-cover rounded-lg"
   const incorrectImage = <Image src="swat-crop.jpg" className={`${imageStyle} object-top`} /> 
   const correctImage = <Image src="true-believer.png" className={`${imageStyle} object-center`} /> 
@@ -16,7 +14,7 @@ const Card = ({ card, nextCardFunction }) => {
   const textColor = isCorrect === true ? "text-emerald-600" : "text-red-600";
   const answerImage = isCorrect === true ? correctImage : incorrectImage;
   const openModal = isCorrect === null ? false : true;
-  const nextAndViewCardButtonVisibility = lastRating != null ? "block" : 'hidden';
+  const nextAndViewCardButtonsVisibility = lastRating != null ? "block" : 'hidden';
   const ratingButtonsVisibility = lastRating != null ? 'hidden' : "block";
 
   const ratingMap = {
@@ -38,6 +36,9 @@ const Card = ({ card, nextCardFunction }) => {
   }, {});
 
   const selectRating = (rating) => {
+    if (lastRating === null) {
+      createRating(ratingSeriesId, card["id"], rating, card["set"])
+    }
     setLastRating(rating)
     const ratings = ratingMap[rating];
 
@@ -48,6 +49,23 @@ const Card = ({ card, nextCardFunction }) => {
       console.log("Incorrect!");
       setIsCorrect(false);
     }
+  };
+
+  const createRating = (seriesId, cardId, rating, set) => {
+    fetch(`/api/rating_series/${seriesId}/ratings`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        card_id: cardId,
+        rating: rating,
+        set: set
+      }),
+    }).then((response) => response.text())
+      .then((ratingSeriesId) => {
+        console.log("ratingSeriesId", ratingSeriesId);
+      });
   };
 
   const nextCard = () => {
@@ -110,7 +128,7 @@ const Card = ({ card, nextCardFunction }) => {
           Trap
         </PrimaryButton>
       </div>
-      <div className={`grid justify-items-center grid-cols-2 pt-2 ${nextAndViewCardButtonVisibility}`}>
+      <div className={`grid justify-items-center grid-cols-2 pt-2 ${nextAndViewCardButtonsVisibility}`}>
         <PrimaryButton
           className="py-6 w-full justify-center text-xl flex items-center"
           onClick={nextCard}

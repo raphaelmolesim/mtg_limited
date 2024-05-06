@@ -6,6 +6,7 @@ import Card from "./Card";
 const Classifier = () => {
   const [set, setSet] = React.useState(null);
   const [card, setCard] = React.useState(null);
+  const [ratingSeriesId, setRatingSeriesId] = React.useState(null);
 
   const setListVisibily = set === null ? "block" : "hidden";
   const setCardVisibility = set === null ? "hidden" : "block";
@@ -19,11 +20,32 @@ const Classifier = () => {
       });
   };
 
+  const createRatingSeries = (set) => {
+    console.log("createRatingSeries");
+    fetch(`/api/rating_series`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        set: set
+      }),
+    }).then((response) => response.text())
+      .then((ratingSeriesId) => {
+        console.log("ratingSeriesId", ratingSeriesId);
+        setRatingSeriesId(ratingSeriesId);
+      });
+  };
+
   useEffect(() => {
-    if (set) {
-      nextCard();
-    }
+    if (set && ratingSeriesId === null)
+      createRatingSeries(set);
   }, [set]);
+
+  useEffect(() => {
+    if (ratingSeriesId) 
+      nextCard();
+  }, [ratingSeriesId]);
 
   return (
     <MasterPage>
@@ -33,7 +55,7 @@ const Classifier = () => {
       </div>
 
       <div className={setCardVisibility}>
-        <Card card={card} nextCardFunction={nextCard}/>
+        <Card card={card} nextCardFunction={nextCard} ratingSeriesId={ratingSeriesId} />
       </div>
     </MasterPage>
   );
