@@ -1,7 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { MenuOutlined, TagOutlined } from "@ant-design/icons";
+import { MenuOutlined, TagOutlined, FundViewOutlined } from "@ant-design/icons";
 import Classifier from "./Classifier";
+import MyData from "./MyData";
 
 const MasterPage = ({ children, className }) => {
   const [menuState, setMenuState] = React.useState(false);
@@ -13,6 +14,11 @@ const MasterPage = ({ children, className }) => {
   const launchClassifier = () => {
     ReactDOM.render(<Classifier />, document.getElementById("app"));
   };
+
+  const launchMyData = () => {
+    ReactDOM.render(<MyData />, document.getElementById("app"));
+  }
+
 
   const menuVisibility = (state) => (state ? "block" : "hidden");
   return (
@@ -28,7 +34,7 @@ const MasterPage = ({ children, className }) => {
         <div
           className={`${menuVisibility(
             menuState
-          )} bg-gray-900 text-slate-100 h-screen w-[190px] absolute top-[67px]`}
+          )} bg-gray-900 text-slate-100 h-screen w-[190px] absolute top-[67px] z-10`}
         >
           <ul>
             <li className="py-4 pl-4">
@@ -37,6 +43,14 @@ const MasterPage = ({ children, className }) => {
                   style={{ fontSize: 20, marginRight: 8, color: "#f1f5f9" }}
                 />
                 Classifier game
+              </a>
+            </li>
+            <li className="py-4 pl-4">
+              <a onClick={launchMyData}>
+                <FundViewOutlined
+                  style={{ fontSize: 20, marginRight: 8, color: "#f1f5f9" }}
+                />
+                My data
               </a>
             </li>
           </ul>

@@ -8,4 +8,5 @@ gem 'mongo'
 group :development do
   gem "rerun"
   gem 'dotenv'
+  gem "debug", ">= 1.0.0"
 end

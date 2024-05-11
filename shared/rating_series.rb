@@ -13,8 +13,16 @@ class RatingSeries
     @status = :open
   end
 
+  def self.parse(hash)
+    series = RatingSeries.new(user_id: hash["user_id"], set: hash["set"])
+    series.id = hash["_id"].to_s
+    series.status = hash["status"]
+    series
+  end
+
   def to_h
     {
+      id: id,
       user_id: user_id,
       set: set,
       series: series,

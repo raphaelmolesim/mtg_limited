@@ -7,7 +7,10 @@ require "./shared/rating"
 require "./shared/cards_repository"
 require "./shared/rating_repository"
 require 'mongo'
-require 'dotenv/load' if ENV['RACK_ENV'] != 'production'
+if ENV['RACK_ENV'] != 'production'
+  require 'dotenv/load'
+  require 'debug'
+end
 
 set :port, 10000
 set :bind, "0.0.0.0"
@@ -60,6 +63,17 @@ end
 get "/api/rating_series/:id/ratings" do
   id = params[:id]
   RatingRepository.get_ratings_by_series_id(id).to_json
+end
+
+get "/api/rating_series" do
+  user_id = 1
+  series = RatingRepository.get_all_rating_series(user_id:)
+  series.each do |series|
+    ratings = RatingRepository.get_ratings_by_series_id(series.id)
+    series.series = ratings
+  end
+  content_type :json
+  series.map { |series| series.to_h }.to_json
 end
 
 post "/api/rating_series" do

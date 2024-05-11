@@ -27,10 +27,17 @@ class RatingRepository
     bson_id = BSON::ObjectId(id)
     collection = client[:rating_series]
     query = {user_id:, set:, _id: bson_id}
-    puts "Query: #{query}"
+    puts "get_rating_series_by_id Query: #{query}"
     series = collection.find(query).first
     raise "Series not found" if series.nil?
     series
+  end
+
+  def self.get_all_rating_series(user_id:)
+    collection = client[:rating_series]
+    query = {user_id:}
+    puts "get_all_rating_series Query: #{query}"
+     collection.find(query).to_a.map { |series| RatingSeries.parse(series) }
   end
 
   def self.close_rating_series(series_id)
