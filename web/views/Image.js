@@ -8,7 +8,6 @@ const Image = ({src, className, props}) => {
     return s3 + src;
   }
 
-  console.log("src", src);
   return (
       <img src={fullName(src)} className={className} {...props} />
   );

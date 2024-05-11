@@ -15,7 +15,7 @@ class Rating
     conclusion = {
       5.0 => "bomb",
       4.5 => "bomb",
-      4.0 => "impacful",
+      4.0 => "impactful",
       3.5 => "impactful",
       3.0 => "filler_a",
       2.5 => "filler_a",
@@ -25,6 +25,7 @@ class Rating
       0.5 => "trap",
       0.0 => "trap"
     }[card_rating] == rating
+    puts "####### Debugging conclusion: #{card_rating} == #{rating} => #{conclusion}"
     conclusion.to_s
   end
 

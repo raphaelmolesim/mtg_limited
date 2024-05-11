@@ -15,13 +15,11 @@ const Classifier = () => {
     fetch(`/api/sets/${set}/cards/sample`)
       .then((response) => response.json())
       .then((data) => {
-        console.log("card", data);
         setCard(data);
       });
   };
 
   const createRatingSeries = (set) => {
-    console.log("createRatingSeries");
     fetch(`/api/rating_series`, {
       method: "POST",
       headers: {
@@ -32,7 +30,6 @@ const Classifier = () => {
       }),
     }).then((response) => response.text())
       .then((ratingSeriesId) => {
-        console.log("ratingSeriesId", ratingSeriesId);
         setRatingSeriesId(ratingSeriesId);
       });
   };
@@ -55,7 +52,7 @@ const Classifier = () => {
       </div>
 
       <div className={setCardVisibility}>
-        <Card card={card} nextCardFunction={nextCard} ratingSeriesId={ratingSeriesId} />
+        <Card card={card} nextCardFunction={nextCard} ratingSeriesId={ratingSeriesId} createRatingSeriesFunction={createRatingSeries} set={set}/>
       </div>
     </MasterPage>
   );

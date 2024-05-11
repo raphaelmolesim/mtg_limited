@@ -9,13 +9,11 @@ const SetList = ({ setSelectorFunction }) => {
     fetch("/api/sets")
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         setSets(data);
       });
   }, []);
 
   const selectSet = (setCode) => {
-    console.log("selectSet", setCode);
     setSelectorFunction(setCode);
   };
 
@@ -32,7 +30,6 @@ const SetList = ({ setSelectorFunction }) => {
   }
 
   const renderSets = (sets) => {
-    console.log("renderSets", sets);
     return sets.map((set) => {
       return (
         <li
