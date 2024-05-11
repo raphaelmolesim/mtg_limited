@@ -7,7 +7,7 @@ require "./shared/rating"
 require "./shared/cards_repository"
 require "./shared/rating_repository"
 require 'mongo'
-require 'dotenv/load'
+require 'dotenv/load' if ENV['RACK_ENV'] != 'production'
 
 set :port, 10000
 set :bind, "0.0.0.0"
