@@ -37,7 +37,7 @@ class RatingRepository
     collection = client[:rating_series]
     query = {user_id:}
     puts "get_all_rating_series Query: #{query}"
-     collection.find(query).to_a.map { |series| RatingSeries.parse(series) }
+    collection.find(query).to_a.map { |series| RatingSeries.parse(series) }
   end
 
   def self.close_rating_series(series_id)
@@ -47,9 +47,9 @@ class RatingRepository
     collection.update_one(query, update)
   end
 
-  private
+  private_class_method
 
   def self.client
-    Mongo::Client.new(ENV["MONGODB_CONNECTION_STRING"])
+    @client ||= Mongo::Client.new(ENV["MONGODB_CONNECTION_STRING"])
   end
 end

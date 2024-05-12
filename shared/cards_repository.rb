@@ -15,7 +15,7 @@ class CardsRepository
     card.merge(rating)
   end
 
-  private
+  private_class_method
   def self.load_dbs(set:)
     scryfall = Scryfall.new
     sets = scryfall.get_block(set).map { |set| set.code.downcase }
