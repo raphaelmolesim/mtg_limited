@@ -5,7 +5,8 @@
   "main": "webpack.config.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "npx webpack --watch"
+    "build": "npx webpack --watch",
+    "build_css": "npx tailwindcss -i ./web/views/style.css -o ./web/public/output.css --watch --jit"
   },
   "author": "",
   "license": "ISC",
