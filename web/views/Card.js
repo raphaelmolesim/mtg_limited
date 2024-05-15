@@ -162,35 +162,35 @@ const Card = ({
           className={`grid justify-items-center grid-cols-2 grid-rows-2 pt-2 ${ratingButtonsVisibility}`}
         >
           <PrimaryButton
-            className="py-4 w-full justify-center text-xl flex items-center"
+            className="py-5 w-full justify-center text-xl flex items-center"
             onClick={() => selectRating("bomb")}
             loading={isLoading}
           >
             Bomb!
           </PrimaryButton>
           <PrimaryButton
-            className="py-4 w-full justify-center text-xl flex items-center"
+            className="py-5 w-full justify-center text-xl flex items-center"
             onClick={() => selectRating("impactful")}
             loading={isLoading}
           >
             Impactful
           </PrimaryButton>
           <PrimaryButton
-            className="py-4 w-full justify-center text-xl flex items-center"
+            className="py-5 w-full justify-center text-xl flex items-center"
             onClick={() => selectRating("filler_a")}
             loading={isLoading}
           >
             Filler A
           </PrimaryButton>
           <PrimaryButton
-            className="py-4 w-full justify-center text-xl flex items-center"
+            className="py-5 w-full justify-center text-xl flex items-center"
             onClick={() => selectRating("filler_b")}
             loading={isLoading}
           >
             Filler B
           </PrimaryButton>
           <PrimaryButton
-            className="py-4 w-full justify-center text-xl flex items-center"
+            className="py-5 w-full justify-center text-xl flex items-center"
             onClick={() => selectRating("trap")}
             loading={isLoading}
           >

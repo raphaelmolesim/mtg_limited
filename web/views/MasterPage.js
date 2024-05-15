@@ -34,7 +34,7 @@ const MasterPage = ({ children, className }) => {
         <div
           className={`${menuVisibility(
             menuState
-          )} bg-gray-900 text-slate-100 h-screen w-[190px] absolute top-[67px] z-10`}
+          )} bg-gray-900 text-slate-100 h-[90vh] w-[190px] absolute top-[67px] z-10`}
         >
           <ul>
             <li className="py-4 pl-4">
@@ -55,7 +55,7 @@ const MasterPage = ({ children, className }) => {
             </li>
           </ul>
         </div>
-        <div className={`content flex-1 bg-white h-screen ${className}`}>
+        <div className={`content flex-1 bg-white h-[90vh] ${className}`}>
           {children}
         </div>
       </div>

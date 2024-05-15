@@ -29,6 +29,7 @@ class Scryfall
   end
 
   def get_block(set_code)
+    raise "Set code is required" if set_code.nil?
     exclude_list = ["memorabilia", "promo", "commander", "promo", "token", "alchemy"]
     sets.select { |set|
       set["code"] == set_code ||

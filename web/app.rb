@@ -69,7 +69,14 @@ get "/api/rating_series" do
   user_id = 1
   series = RatingRepository.get_all_rating_series(user_id:)
   series.each do |series|
-    ratings = RatingRepository.get_ratings_by_series_id(series.id)
+    ratings = RatingRepository.get_ratings_by_series_id(series.id).map do |rating|
+      Rating.new(
+        card_id: rating["card_id"], 
+        rating: rating["rating"], 
+        rating_series_id: rating["rating_series_id"], 
+        set: series.set
+      ).to_h(with_card: true)
+    end
     series.series = ratings
   end
   content_type :json
